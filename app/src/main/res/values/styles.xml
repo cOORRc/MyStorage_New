@@ -1,0 +1,182 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="showstatus" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <!--To change the text styling of options menu items</item>-->
+        <item name="android:itemTextAppearance">@style/menu</item>
+        <!--To change the background of options menu-->
+        <item name="android:itemBackground">@color/color_white</item>
+    </style>
+
+    <style name="AlertDialog_error" parent="ThemeOverlay.AppCompat.Dialog.Alert">
+        <item name="android:fontFamily">sans-serif-condensed-medium</item>
+        <item name="android:textColor">@android:color/holo_red_dark</item>
+        <item name="android:textColorPrimary">@android:color/black</item>
+    </style>
+
+    <style name="AlertDialog_info" parent="ThemeOverlay.AppCompat.Dialog.Alert">
+        <item name="android:fontFamily">sans-serif-condensed-medium</item>
+        <item name="android:textColor">@android:color/holo_blue_dark</item>
+        <item name="android:textColorPrimary">@android:color/black</item>
+
+    </style>
+
+    <style name="AlertDialog_complete" parent="ThemeOverlay.AppCompat.Dialog.Alert">
+        <item name="android:fontFamily">sans-serif-condensed-medium</item>
+        <item name="android:textColor">@android:color/holo_green_dark</item>
+        <item name="android:textColorPrimary">@android:color/black</item>
+    </style>
+    <style name="menu" parent="Widget.AppCompat.Light.PopupMenu">
+<!--        parent="TextAppearance.AppCompat.Widget.ActionBar.Menu"-->
+        <item name="android:textColor">@color/color_Blue_StTropaz</item>
+        <item name="android:text">@style/font_ListItemMenuTitle</item>
+    </style>
+
+    <style name="FullscreenTheme" parent="AppTheme.NoActionBar">
+        <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
+        <!--        <item name="android:windowActionBarOverlay">false</item>-->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
+        <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
+    </style>
+
+    <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@color/black_overlay</item>
+    </style>
+
+    <style name="edit_login" parent="Base.Widget.MaterialComponents.TextInputLayout">
+        <item name="boxBackgroundColor">@color/color_G_AthensGray</item>
+        <!--        titel and line color on focus    -->
+        <item name="colorControlActivated">@color/color_Blue_DodgerBlue</item>
+
+        <item name="android:textColorHint">@color/black_overlay</item>
+        <!--        text input color-->
+        <item name="android:colorForeground">@color/color_black</item>
+        <!--        line under color    -->
+        <item name="colorControlNormal">@color/color_Blue_BigStone</item>
+        <!--        helper text color-->
+        <item name="android:textColorSecondary">@color/color_Blue_StTropaz</item>
+
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textSize">@dimen/text_subheader</item>
+    </style>
+
+    <style name="edit_proj" parent="Base.Widget.MaterialComponents.TextInputLayout">
+        <item name="boxBackgroundColor">@color/color_G_AthensGray</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textSize">@dimen/text_subheader</item>
+        <item name="colorControlNormal">@color/color_Blue_BigStone</item>
+    </style>
+
+    <style name="edit_Scan" parent="Widget.AppCompat.EditText">
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textSize">@dimen/text_subheader</item>
+        <item name="android:background">@drawable/edittext_bg_res</item>
+<!--        <item name="android:enabled">false</item>-->
+        <item name="android:ems">10</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:padding">10dp</item>
+
+    </style>
+
+    <style name="Title" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/color_white</item>
+        <item name="android:fontFamily">sans-serif-condensed-medium</item>
+        <item name="android:textSize">@dimen/text_pageTitle</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:padding">@dimen/appbar_padding</item>
+    </style>
+
+    <style name="button_style" parent="Widget.MaterialComponents.Button">
+        <item name="android:textSize">@dimen/text_pageTitle</item>
+        <item name="android:fontFamily">sans-serif-black</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingStart">30dp</item>
+        <item name="android:paddingEnd">30dp</item>
+    </style>
+
+    <style name="font_PageTitle" parent="">
+        <item name="android:fontFamily">sans-serif-condensed-medium</item>
+        <item name="android:textSize">@dimen/text_pageTitle</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="font_BodyText" parent="">
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textSize">@dimen/text_pageTitle</item>
+    </style>
+
+    <style name="font_ModalText" parent="">
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textSize">@dimen/text_subheader</item>
+    </style>
+
+    <style name="font_ListItem" parent="">
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textSize">@dimen/text_subheader</item>
+    </style>
+
+    <style name="font_ListItemMenuTitle" parent="">
+        <item name="android:fontFamily">sans-serif-condensed-medium</item>
+        <item name="android:textSize">@dimen/text_secondaryText_or_captions</item>
+    </style>
+
+    <style name="font_ListItemSecondaryTitle" parent="">
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textSize">@dimen/text_secondaryText_or_captions</item>
+    </style>
+
+    <style name="font_FormTab" parent="">
+        <item name="android:fontFamily">sans-serif-condensed-medium</item>
+        <item name="android:textSize">@dimen/text_secondaryText_or_captions</item>
+    </style>
+
+    <style name="font_FormButtonOutlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:fontFamily">sans-serif-condensed-medium</item>
+        <item name="android:textSize">@dimen/text_secondaryText_or_captions</item>
+    </style>
+
+    <style name="font_FormButton">
+        <item name="android:fontFamily">sans-serif-condensed-medium</item>
+        <item name="android:textSize">@dimen/text_secondaryText_or_captions</item>
+    </style>
+
+    <style name="font_FormTextButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:fontFamily">sans-serif-condensed-medium</item>
+        <item name="android:textSize">@dimen/text_secondaryText_or_captions</item>
+    </style>
+
+    <style name="font_FormText" parent="">
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textSize">@dimen/text_subheader</item>
+    </style>
+
+    <style name="font_FormErrorText" parent="">
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textSize">@dimen/text_errorText</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+</resources>

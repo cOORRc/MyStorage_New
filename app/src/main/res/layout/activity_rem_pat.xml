@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_G_AthensGray">
+
+    <include
+        android:id="@+id/toolbar_name"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+<!--    android:onClick="onClick"-->
+    <Button
+        android:id="@+id/bt_scan"
+        style="@style/font_ListItemSecondaryTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="25dp"
+        android:background="@color/color_white"
+        android:drawableTop="@drawable/ic_qr_code"
+        android:paddingHorizontal="10dp"
+        android:paddingTop="10dp"
+        android:textColor="@color/color_Blue_HippieBlueTab" />
+<!--    android:text="@string/tab_to_scan"-->
+    <TextView
+        android:id="@+id/title_namepage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bt_scan"
+        android:layout_marginStart="30dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text=""
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/text_pageTitle"
+        android:textStyle="bold"
+
+        />
+
+    <EditText
+        android:id="@+id/et_pallet_id"
+        style="@style/edit_Scan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_namepage"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:hint="@string/palette_id"
+        android:focusedByDefault="true"
+        android:imeOptions="actionNext"
+        android:inputType="textPersonName" />
+    <!--    android:importantForAutofill="no"-->
+    <EditText
+        android:id="@+id/et_location_id"
+        style="@style/edit_Scan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_pallet_id"
+        android:layout_alignStart="@id/et_pallet_id"
+        android:layout_alignEnd="@id/et_pallet_id"
+        android:hint="@string/location_id"
+        android:inputType="textPersonName"
+        android:imeOptions="actionNext"
+        />
+    <!--    android:importantForAutofill="no"-->
+    <Button
+        android:id="@+id/bt_clear"
+        style="@style/font_FormButtonOutlined"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_location_id"
+        android:layout_alignBaseline="@id/bt_confirm"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_toStartOf="@id/bt_confirm"
+        android:onClick="onClick"
+        android:text="@string/clear"
+        android:textColor="@color/colorAccent" />
+
+    <Button
+        android:id="@+id/bt_confirm"
+        style="@style/font_FormButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_location_id"
+        android:layout_alignEnd="@id/et_location_id"
+        android:layout_marginTop="20dp"
+        android:enabled="false"
+        android:background="@drawable/confirm_button"
+        android:text="@string/confirm_putaway"
+        android:imeOptions="actionNext"
+        android:textColor="@color/color_white" />
+
+</RelativeLayout>
+
+<!--    android:background="@drawable/confirm_button"-->
+<!--    android:enabled="false"-->
