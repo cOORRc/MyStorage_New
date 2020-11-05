@@ -16,7 +16,6 @@ public class UndoListener implements View.OnClickListener {
 
 	private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
 
-
 	public UndoListener(Context context) {
 		this._context = context;
 		pref = _context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);

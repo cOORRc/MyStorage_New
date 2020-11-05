@@ -44,7 +44,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PutawayActivity extends AppCompatActivity {
-
 	private Button bt_scanner, bt_confirm, bt_clearSnackBarWithAction;
 	private EditText et_dataPallet, et_dataLocation;
 	private RequestQueue put_Queue;
@@ -63,12 +62,12 @@ public class PutawayActivity extends AppCompatActivity {
 	final String PREFNAME = "Preferences";
 	final String USER_ID = "User_id";
 	final String USER_FName = "User_FName";
+	private String Pallet_ID, Location_ID;
 
 	private void getSharedPrefer() {
 		sp = getSharedPreferences(PREFNAME, Context.MODE_PRIVATE);
 		user_id = sp.getString(USER_ID, "");
 		user_Fname = sp.getString(USER_FName, "");
-//		Toast.makeText(this, "sp :  " + user_id + "," + user_Fname, Toast.LENGTH_SHORT).show();
 	}
 
 	//// black page
@@ -91,18 +90,6 @@ public class PutawayActivity extends AppCompatActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
-//	private static String intent_user_id ,intent_userFName;
-////	private void ResultIntent() {
-////		Intent intent = getIntent();
-////		intent_user_id = intent.getStringExtra("Result_user_ID");
-////		intent_userFName = intent.getStringExtra("Result_user_fName");
-////		Log.i("putaway","Result : userID : " + intent_user_id +
-////				"\n full name : " + intent_userFName );
-////		Toast.makeText(this, "onResume " +intent_user_id+
-////				"," +intent_userFName , Toast.LENGTH_SHORT).show();
-////
-////	}
 
 	@SuppressLint("WrongConstant")
 	@Override
@@ -151,15 +138,6 @@ public class PutawayActivity extends AppCompatActivity {
 		public void onTextChanged(CharSequence s, int start, int before, int count) {
 			palletInput = et_dataPallet.getText().toString().trim();
 			locationInput = et_dataLocation.getText().toString().trim();
-//			bt_confirm.setEnabled(!palletInput.isEmpty() && !locationInput.isEmpty());
-//			bt_confirm.setBackgroundResource(R.drawable.shape_button);
-//			bt_confirm.setOnClickListener(new View.OnClickListener() {
-//				@Override
-//				public void onClick(View v) {
-////					callApiConfirm();
-//					Toast.makeText(getApplicationContext(), "click ", Toast.LENGTH_SHORT).show();
-//				}
-//			});
 		}
 
 		@Override
@@ -172,31 +150,15 @@ public class PutawayActivity extends AppCompatActivity {
 				bt_confirm.setBackgroundResource(R.drawable.shape_button);
 				et_dataPallet.requestFocus();
 				callApiConfirm();
-
 			}
-//			Toast.makeText(getApplicationContext(), "changed ", Toast.LENGTH_SHORT).show();
 		}
 	};
 
 	public void onClick(View view) {
-//		if (view.getId() == R.id.bt_scan) {
-//			if (ContextCompat.checkSelfPermission(this,
-//					Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-//				requestStoragePermission();
-//				Log.d("TAG", "STORAGE_PERMISSION_CODE " + STORAGE_PERMISSION_CODE);
-//			} else {
-//				Log.d("TAG", "STORAGE_PERMISSION_CODE " + STORAGE_PERMISSION_CODE);
-//				Intent scanner_stor = new Intent(getApplication(), ScanActivity.class);
-//				startActivityForResult(scanner_stor, 0);
-//			}
-//
-//		}
-
 		if (view.getId() == R.id.bt_clear) {
 			et_dataPallet.getText().clear();
 			et_dataLocation.getText().clear();
 			Snackbar snackbar = Snackbar.make(view, "Data deleted", Snackbar.LENGTH_SHORT);
-//			snackbar.setAction(R.string.undo_string, new UndoListener(this));
 			snackbar.getView().setBackgroundColor(0xFFFF0000);
 			snackbar.show();
 		}
@@ -205,7 +167,6 @@ public class PutawayActivity extends AppCompatActivity {
 	@SuppressLint("MissingSuperCall")
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		if (requestCode == 0 && resultCode == RESULT_OK) {
-//        if (requestCode == REQUEST_QR_SCAN && resultCode == RESULT_OK) {
 			String contents_sheet = intent.getStringExtra("SCAN_RESULT");
 			putaway_scan_contents_sheet = contents_sheet;
 			Log.i("Scan1", putaway_scan_contents_sheet);
@@ -238,12 +199,10 @@ public class PutawayActivity extends AppCompatActivity {
 //						Matcher math_dataHO = patternHO.matcher(putaway_scan_contents_sheet);
 						Log.i("Scan2", putaway_scan_contents_sheet);
 						if (math_dataPL.find()) {
-//							Toast.makeText(PutawayActivity.this, "chack_PL :" + math_dataPL, Toast.LENGTH_SHORT).show();
 							et_dataPallet.setText(putaway_scan_contents_sheet);
 							et_dataPallet.setTextColor(Color.BLACK);
 						}
 						else {
-//							Toast.makeText(PutawayActivity.this, "chack_HO :" + math_dataHO, Toast.LENGTH_SHORT).show();
 							et_dataLocation.setText(putaway_scan_contents_sheet);
 							et_dataLocation.setTextColor(Color.BLACK);
 						}
@@ -263,7 +222,6 @@ public class PutawayActivity extends AppCompatActivity {
 								.show();
 						builder.wait(200);
 					}
-
 				} catch (JSONException | InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -280,9 +238,8 @@ public class PutawayActivity extends AppCompatActivity {
 	private void callApiConfirm() {
 		String url = "https://api.albatrossthai.com/MyStorage/php/Confirm_Putaway.php";
 		String User_ID = user_id;
-		String Pallet_ID = et_dataPallet.getText().toString().trim();
-		String Location_ID = et_dataLocation.getText().toString().trim();
-//		Toast.makeText(this, "User_ID" + User_ID, Toast.LENGTH_SHORT).show();
+		Pallet_ID = et_dataPallet.getText().toString().trim();
+		Location_ID = et_dataLocation.getText().toString().trim();
 		HashMap<String, String> confirm_putaway = new HashMap<>();
 		confirm_putaway.put("Pallet_ID", Pallet_ID);
 		confirm_putaway.put("Location_ID", Location_ID);
@@ -302,7 +259,7 @@ public class PutawayActivity extends AppCompatActivity {
 						AlertDialog.Builder builder = new AlertDialog.Builder(PutawayActivity.this, R.style.AlertDialog_complete);
 						builder.setTitle("Complete")
 								.setIcon(R.drawable.ic_done)
-								.setMessage(status_text)
+								.setMessage(status_text + Location_ID)
 								.create()
 								.show();
 					} else {

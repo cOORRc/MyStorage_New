@@ -50,7 +50,7 @@ public class MoveActivity extends AppCompatActivity {
 
 	UndoListener undoListener_perf;
 	private TextView tv_page_rem;
-
+	private String Pallet_ID, Location_ID;
 	String move_pat = "(^[PL])";
 //	String move_loc = "(^[HO])";
 	public static String move_sta_id, move_defulf_id = "0";
@@ -68,7 +68,6 @@ public class MoveActivity extends AppCompatActivity {
 		sp = getSharedPreferences(PREFNAME, Context.MODE_PRIVATE);
 		move_user_id = sp.getString(USER_ID, "");
 		move_user_Fname = sp.getString(USER_FName, "");
-//		Toast.makeText(this, "sp :  " + move_user_id + "," + move_user_Fname, Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
@@ -81,14 +80,10 @@ public class MoveActivity extends AppCompatActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-//			case android.R.id.home:
-//				startActivity(new Intent(RemoveActivity.this, ChooseMenu.class)); // close this activity and return to preview activity (if there is any)
-//				return true;
 		if (item.getItemId() == R.id.log_out) {
 			editor = sp.edit();
 			editor.clear();
 			editor.commit();
-			Log.d("TAG", "putaway_logout");
 			moveTaskToBack(true);
 			startActivity(new Intent(MoveActivity.this, loginActivity.class)); // close this activity and return to preview activity (if there is any)
 			return true;
@@ -118,16 +113,6 @@ public class MoveActivity extends AppCompatActivity {
 	}
 
 	public void onClick(View view) {
-//		if (view.getId() == R.id.bt_scan) {
-//			if (ContextCompat.checkSelfPermission(this,Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-//				requestStoragePermission();
-//				Log.d("TAG", "STORAGE_PERMISSION_CODE " + STORAGE_PERMISSION_CODE);
-//			} else {
-//				Log.d("TAG", "STORAGE_PERMISSION_CODE " + STORAGE_PERMISSION_CODE);
-//				Intent scanner_stor = new Intent(getApplication(), ScanActivity.class);
-//				startActivityForResult(scanner_stor, 0);
-//			}
-//		}
 		if (view.getId() == R.id.bt_confirm) {
 			if (rem_et_dataPallet.length() > 0 && rem_et_dataLocation.length() > 0) {
 				rem_bt_confirm.setEnabled(true);
@@ -150,7 +135,6 @@ public class MoveActivity extends AppCompatActivity {
 	@SuppressLint("MissingSuperCall")
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		if (requestCode == 0 && resultCode == RESULT_OK) {
-//        if (requestCode == REQUEST_QR_SCAN && resultCode == RESULT_OK) {
 			String rem_contents_sheet = intent.getStringExtra("SCAN_RESULT");
 			move_scan_contents_sheet = rem_contents_sheet;
 			callApiMoveScanCheck();
@@ -168,32 +152,25 @@ public class MoveActivity extends AppCompatActivity {
 			public void onResponse(JSONObject response) {
 				try {
 					JSONObject api_jsonObj = new JSONObject(String.valueOf(response));
-					Log.i("api_move", String.valueOf(response));
 					String status_id = api_jsonObj.getString("Status");
-					Log.i("api_status_id", status_id);
 					move_sta_id = status_id;
-					Log.i("api_sta_id", move_sta_id);
 					if (!move_sta_id.matches(move_defulf_id)) {
-						Log.i("api", "matches 1 ");
 						Pattern patternPL = Pattern.compile(move_pat);
 //						Pattern patternHO = Pattern.compile(move_loc);
 						Matcher math_dataPL = patternPL.matcher(move_scan_contents_sheet);
 //						Matcher math_dataHO = patternHO.matcher(move_scan_contents_sheet);
 						Log.i("Scan2", move_scan_contents_sheet);
 						if (math_dataPL.find()) {
-//							Toast.makeText(MoveActivity.this, "chack_PL :" + math_dataPL, Toast.LENGTH_SHORT).show();
 							rem_et_dataPallet.setText(move_scan_contents_sheet);
 							rem_et_dataPallet.setTextColor(Color.BLACK);
 						}
 						else {
-//							Toast.makeText(MoveActivity.this, "chack_HO :" + math_dataHO, Toast.LENGTH_SHORT).show();
 							rem_et_dataLocation.setText(move_scan_contents_sheet);
 							rem_et_dataLocation.setTextColor(Color.BLACK);
 						}
 					}
 					if (move_sta_id.matches(move_defulf_id)) {
 						String result_data = api_jsonObj.getString("ResultData");
-						Log.i("api_move", "00000 : " + move_scan_contents_sheet);
 						AlertDialog.Builder builder = new AlertDialog.Builder(MoveActivity.this, R.style.AlertDialog_info);
 						builder.setTitle("Explain")
 								.setIcon(R.drawable.ic_info)
@@ -201,7 +178,6 @@ public class MoveActivity extends AppCompatActivity {
 								.create()
 								.show();
 					}
-
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -218,9 +194,8 @@ public class MoveActivity extends AppCompatActivity {
 	private void callApiMoveConfirm() {
 		String url_move = "https://api.albatrossthai.com/MyStorage/php/Confirm_Move_Putaway.php";
 		String User_ID = move_user_id;
-		String Pallet_ID = rem_et_dataPallet.getText().toString().trim();
-		String Location_ID = rem_et_dataLocation.getText().toString().trim();
-		Log.i("api_move","User_ID : " + User_ID + "\n pallet_ID : "+Pallet_ID+"\n Location_ID : "+Location_ID);
+		Pallet_ID = rem_et_dataPallet.getText().toString().trim();
+		Location_ID = rem_et_dataLocation.getText().toString().trim();
 		HashMap<String, String> confirm_move = new HashMap<>();
 		confirm_move.put("Pallet_ID", Pallet_ID);
 		confirm_move.put("Location_ID", Location_ID);
@@ -233,14 +208,13 @@ public class MoveActivity extends AppCompatActivity {
 					JSONObject api_jsonObj = new JSONObject(String.valueOf(response));
 					String status_id = api_jsonObj.getString("tStatus");
 					String status_text = api_jsonObj.getString("tStatus_Text");
-					Log.i("api_status", status_id + status_text);
 					rem_et_dataPallet.getText().clear();
 					rem_et_dataLocation.getText().clear();
 					if (!status_id.matches(move_defulf_id)) {
 						AlertDialog.Builder builder = new AlertDialog.Builder(MoveActivity.this, R.style.AlertDialog_complete);
 						builder.setTitle("Complete")
 								.setIcon(R.drawable.ic_done)
-								.setMessage(status_text)
+								.setMessage(status_text + Location_ID)
 								.create()
 								.show();
 					} else {

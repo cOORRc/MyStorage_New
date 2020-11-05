@@ -14,17 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 public class ChooseMenu extends AppCompatActivity {
-
-//	private static String intent_user_id ,intent_userFName;
-//	private void ResultIntent() {
-//		Intent intent = getIntent();
-//		intent_user_id = intent.getStringExtra("Result_user_ID");
-//		intent_userFName = intent.getStringExtra("Result_user_fName");
-//		Log.i("ChooseMenu","Result : userID : " + intent_user_id +
-//				"\n full name : " + intent_userFName );
-//
-//	}
-
 	SharedPreferences sp;
 	SharedPreferences.Editor editor;
 	final String PREFNAME = "Preferences";
@@ -36,7 +25,6 @@ public class ChooseMenu extends AppCompatActivity {
 		sp = getSharedPreferences(PREFNAME, Context.MODE_PRIVATE);
 		String user_id = sp.getString(USER_ID, "");
 		String user_Fname = sp.getString(USER_FName, "");
-//		Toast.makeText(this, "sp :  " + user_id + "," + user_Fname, Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
@@ -47,9 +35,7 @@ public class ChooseMenu extends AppCompatActivity {
 		TextView put_text_title = findViewById(R.id.text_title);
 		put_text_title.setText(R.string.app);
 		setSupportActionBar(toolbar);
-
 		getSharedPrefer();
-//		ResultIntent();
 	}
 
 	@RequiresApi(api = Build.VERSION_CODES.O)
@@ -65,8 +51,5 @@ public class ChooseMenu extends AppCompatActivity {
 	@Override
 	public void onResume() {
 		super.onResume();
-//		Toast.makeText(this, "onResume " +intent_user_id+
-//				"," +intent_userFName , Toast.LENGTH_SHORT).show();
-
 	}
 }

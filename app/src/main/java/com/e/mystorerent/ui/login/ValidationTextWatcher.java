@@ -18,13 +18,5 @@ public class ValidationTextWatcher implements TextWatcher {
 	}
 
 	public void afterTextChanged(Editable editable) {
-//		switch (view.getId()) {
-//			case R.id.user_box:
-//				validateUser();
-//				break;
-//			case R.id.pass_box:
-//				validatePassword();
-//				break;
-//		}
 	}
 }

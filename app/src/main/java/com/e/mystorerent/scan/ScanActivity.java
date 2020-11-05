@@ -39,8 +39,6 @@ public class ScanActivity extends AppCompatActivity implements ZXingScannerView.
 	@Override
 	public void handleResult(Result rawResult) {
 		// Do something with the result here
-		// Log.v("tag", rawResult.getText()); // Prints scan results
-		// Log.v("tag", rawResult.getBarcodeFormat().toString()); // Prints the scan format (qrcode, pdf417 etc.)
 		Intent result = new Intent();
 		result.putExtra("SCAN_RESULT", rawResult.getText());
 		result.putExtra("SCAN_RESULT_FORMAT", rawResult.getBarcodeFormat().toString());

@@ -109,17 +109,14 @@ public class loginActivity extends AppCompatActivity {
 
 	private boolean validateInput(String Username, String Password) {
 		if (Username.isEmpty()) {
-			Log.i("validate_text", "Username = " + Username);
 			login_username_layout.setError(getString(R.string.text_username_cannot_be_empty));
 			return false;
 		}
 		if (Password.isEmpty()) {
-			Log.i("validate_text", "Password = " + Password);
 			login_password_layout.setError(getString(R.string.text_password_cannot_be_empty));
 			return false;
 		}
 		if (!Username.isEmpty() && Username.length() < 4) {
-			Log.i("validate_text", "Username = " + Username);
 			login_password_layout.setError(null);
 			login_username_layout.setError(getString(R.string.text_username_helper));
 			return false;
@@ -145,11 +142,9 @@ public class loginActivity extends AppCompatActivity {
 			return false;
 		}
 		if ((!Username.isEmpty() && Username.length() >= 4) && (!Password.isEmpty() && Password.length() >= 4)) {
-//			getFragmentManager().popBackStack();
 			login_username_layout.setError(null);
 			login_password_layout.setError(null);
 			json_dataLogin();
-//			finish();
 			return false;
 		}
 		return false;
@@ -157,29 +152,19 @@ public class loginActivity extends AppCompatActivity {
 
 	private void json_dataLogin() {
 		String url = "https://api.albatrossthai.com/MyStorage/php/login.php";
-		Log.i("api_login", "url : " + url);
 		String username_box = login_username_edit.getText().toString().trim();
 		String password_box = login_password_edit.getText().toString().trim();
-		Log.i("api_login", "username : " + username_box);
-		Log.i("api_login", "password : " + password_box);
-
 		HashMap<String, String> par_login = new HashMap<>();
 		par_login.put("User_Name", username_box);
 		par_login.put("Password", password_box);
-		Log.i("api_login", "HashMap_Parame : " + String.valueOf(par_login));
-
 		JSONObject data_login = new JSONObject(par_login);
 		JsonObjectRequest request = new JsonObjectRequest(url, data_login, new Response.Listener<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject response) {
 				try {
 					JSONObject api_jsonObj = new JSONObject(String.valueOf(response));
-					Log.i("api_login", "Response_jsonObj : " + String.valueOf(api_jsonObj));
 					String status_id = api_jsonObj.getString("Status");
 					JSONArray ja_ResultData = api_jsonObj.getJSONArray("ResultData");
-
-					Log.i("api_login", "status_id : " + status_id +
-							", ja_ResultData : " + ja_ResultData);
 					ArrayList<String> ar_resultData = new ArrayList<String>();
 					for (int i = 0; i < ja_ResultData.length(); i++) {
 						JSONObject unpack_resulData = ja_ResultData.getJSONObject(i);
@@ -187,23 +172,15 @@ public class loginActivity extends AppCompatActivity {
 						String user_fName = unpack_resulData.getString("user_fName");
 						ar_resultData.add(user_id);
 						ar_resultData.add(user_fName);
-						Log.i("api_login", "ja_ResultData = " + "user_id : " + ar_resultData.get(0) +
-								", user_fName : " + ar_resultData.get(1));
 					}
 					String str_user_id = ar_resultData.get(0);
 					String str_user_full_name = ar_resultData.get(1);
-
 					sta_id = status_id;
-					Log.i("api_login ", "staNum " + sta_id);
 					intent_user_id = str_user_id;
 					intent_user_fName = str_user_full_name;
-					Log.i("api_login", "outside ja_ResultData = " + "user_id : " + intent_user_id +
-							", user_fName : " + intent_user_fName);
 					editor.putString(USER_ID, intent_user_id);
 					editor.putString(USER_FName, intent_user_fName);
 					editor.commit();
-//					Toast.makeText(loginActivity.this, "sp : " + sp.getString(USER_ID, ""), Toast.LENGTH_SHORT).show();
-
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
@@ -219,7 +196,6 @@ public class loginActivity extends AppCompatActivity {
 							.create()
 							.show();
 				}
-				Log.i("api_login ", "staNumaaaa " + sta_id);
 			}
 
 		}, new Response.ErrorListener() {

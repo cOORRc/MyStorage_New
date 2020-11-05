@@ -45,23 +45,7 @@ public class FullscreenActivity extends AppCompatActivity {
 	private final Handler mHideHandler = new Handler();
 	private View mContentView;
 	private Button mDummy;
-//	private final Runnable mHidePart2Runnable = new Runnable() {
-//		@SuppressLint("InlinedApi")
-//		@Override
-//		public void run() {
-//			// Delayed removal of status and navigation bar
-//
-//			// Note that some of these constants are new as of API 16 (Jelly Bean)
-//			// and API 19 (KitKat). It is safe to use them, as they are inlined
-//			// at compile-time and do nothing on earlier devices.
-//			mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
-//					| View.SYSTEM_UI_FLAG_FULLSCREEN
-//					| View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-//					| View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-//					| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-//					| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
-//		}
-//	};
+
 	private View mControlsView;
 	private final Runnable mShowPart2Runnable = new Runnable() {
 		@Override
@@ -97,12 +81,9 @@ public class FullscreenActivity extends AppCompatActivity {
 					Intent goto_login = new Intent(getApplication(),loginActivity.class);
 					startActivity(goto_login);
 					finish();
-//					Toast.makeText(getApplicationContext(), "Internet Connected", Toast.LENGTH_SHORT).show();
 				} else {
 					Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
 				}
-
-
 			}
 			return false;
 		}
@@ -134,7 +115,6 @@ public class FullscreenActivity extends AppCompatActivity {
 		// operations to prevent the jarring behavior of controls going away
 		// while interacting with the UI.
 		findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
-
 	}
 
 	@Override
@@ -156,10 +136,6 @@ public class FullscreenActivity extends AppCompatActivity {
 
 			hide();
 		} else {
-//			YoYo.with(Techniques.BounceIn)  //Wobble
-//					.duration(2000)
-//					.repeat(0)
-//					.playOn(findViewById(R.id.fullscreen_content));
 			show();
 		}
 	}
@@ -172,10 +148,8 @@ public class FullscreenActivity extends AppCompatActivity {
 		}
 		mControlsView.setVisibility(View.GONE);
 		mVisible = false;
-
 		// Schedule a runnable to remove the status and navigation bar after a delay
 		mHideHandler.removeCallbacks(mShowPart2Runnable);
-//		mHideHandler.postDelayed(mHidePart2Runnable, UI_ANIMATION_DELAY);
 	}
 
 	@SuppressLint("InlinedApi")
@@ -184,9 +158,7 @@ public class FullscreenActivity extends AppCompatActivity {
 		mContentView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
 				| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
 		mVisible = true;
-
 		// Schedule a runnable to display UI elements after a delay
-//		mHideHandler.removeCallbacks(mHidePart2Runnable);
 		mHideHandler.postDelayed(mShowPart2Runnable, UI_ANIMATION_DELAY);
 	}
 
@@ -197,7 +169,6 @@ public class FullscreenActivity extends AppCompatActivity {
 	private void delayedHide(int delayMillis) {
 		mHideHandler.removeCallbacks(mHideRunnable);
 		mHideHandler.postDelayed(mHideRunnable, delayMillis);
-
 	}
 
 	public boolean isConnected() {
